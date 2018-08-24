@@ -62,3 +62,7 @@ typings/
 
 # WebStorm
 .idea/
+
+# docker-override
+codebase/
+override/
