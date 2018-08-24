@@ -11,6 +11,9 @@ const fu = require('nodejs-fu')
     , configFile = path.join(homedir, '.docker-override.json')
     , files = process.argv.slice(2)
 
+//
+console.log('[START] docker-override: init')
+
 // Check for configuration
 if (!fu.fileExists(configFile)) {
     console.log('[ERROR] docker-override: file not found (.docker-override.json)')
