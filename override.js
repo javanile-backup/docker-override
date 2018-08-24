@@ -14,11 +14,12 @@ const fu = require('nodejs-fu')
 // Check for configuration
 if (!fu.fileExists(configFile)) {
     console.log('[ERROR] docker-override: file not found (.docker-override.json)')
-    //process.exit(1);
+    process.exit(1);
 }
 
-const codebasePath = 'codebase'
-    , overridePath = 'override'
+const configInfo = fu.readJsonFile(configFile)
+    , codebasePath = configInfo['codebase']
+    , overridePath = configInfo['override']
     , overrideFile = path.join(overridePath, '.override.json')
 
 fu.mkdir(codebasePath)
