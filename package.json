@@ -1,0 +1,29 @@
+{
+    "name": "docker-override",
+    "version": "0.1.0",
+    "license": "MIT",
+    "author": {
+        "name": "Francesco Bianco",
+        "email": "bianco@javanile.org"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/javanile/docker-override.git"
+    },
+    "bin": {
+        "override": "./override.js"
+    },
+    "scripts": {
+        "test": "mocha --reporter spec --recursive | sed '/^\\s*$/d'",
+        "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --recursive",
+        "info": "echo 'developed by Francesco Bianco'"
+    },
+    "dependencies": {
+        "nodejs-fu": "^0.2.0"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-fs": "^1.0.0",
+        "mocha": "^5.2.0"
+    }
+}
