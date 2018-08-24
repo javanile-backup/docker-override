@@ -18,8 +18,8 @@ if (!fu.fileExists(configFile)) {
 }
 
 const configInfo = fu.readJsonFile(configFile)
-    , codebasePath = configInfo['codebase']
-    , overridePath = configInfo['override']
+    , codebasePath = typeof configInfo['codebase'] !== 'undefined' ? configInfo['codebase'] : 'codebase'
+    , overridePath = typeof configInfo['override'] !== 'undefined' ? configInfo['override'] : 'override'
     , overrideFile = path.join(overridePath, '.override.json')
 
 fu.mkdir(codebasePath)
@@ -28,7 +28,7 @@ fu.mkdir(overridePath)
 if (!fu.fileExists(overrideFile)) {
     fu.writeJsonFile(overrideFile, {files: {}})
 }
-const overrideInfo = fu.writeJsonFile(overrideFile)
+const overrideInfo = fu.readJsonFile(overrideFile)
 
 // Add files
 if (files && files.length > 0) {
@@ -45,7 +45,7 @@ if (files && files.length > 0) {
     fu.writeJsonFile(overrideFile, overrideInfo)
 }
 
-//
+// Define override action
 function overrideAction(file) {
     var originalInputFile = path.join(codebasePath, file + '.original')
     var codebaseInputFile = path.join(codebasePath, file)
@@ -63,6 +63,7 @@ function overrideAction(file) {
     }
 }
 
+// Loop for files
 for (var file in overrideInfo.files) {
     if (overrideInfo.files.hasOwnProperty(file)) {
         switch (overrideInfo.files[file]) {
