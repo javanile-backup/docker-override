@@ -35,7 +35,7 @@ if (files && files.length > 0) {
     for (var i in files) {
         if (files.hasOwnProperty(i)) {
             var codebaseInputFile = path.join(codebasePath, files[i])
-            var overrideIntpuFile = path.join(overridePath, files[i])
+            var overrideInputFile = path.join(overridePath, files[i])
             if (fu.fileExists(codebaseInputFile) && !fu.fileExists(overrideInputFile)) {
                 fu.copy(codebaseInputFile, overrideInputFile)
             }
@@ -49,17 +49,14 @@ if (files && files.length > 0) {
 function overrideAction(file) {
     var originalInputFile = path.join(codebasePath, file + '.original')
     var codebaseInputFile = path.join(codebasePath, file)
-    var overrideIntpuFile = path.join(overridePath, file)
+    var overrideInputFile = path.join(overridePath, file)
     if (!fu.fileExists(overrideIntpuFile)) { return; }
-
-    if (!fu.fileExists(originalInputFile)) {
-        fu.rename(codebaseInputFile, originalInputFile)
-    }
+    if (!fu.fileExists(originalInputFile)) { fu.rename(codebaseInputFile, originalInputFile) }
 
     console.log('[ACTION] docker-override: override (' + file + ')')
     switch (path.extname(file)) {
-        case 'json': return fu.mergeJsonFile(codebaseInputFile, originalInputFile, overrideIntpuFile)
-        default: return fu.copy(overrideIntpuFile, codebaseInputFile)
+        case 'json': return fu.mergeJsonFile(codebaseInputFile, originalInputFile, overrideInputFile)
+        default: return fu.copy(overrideInputFile, codebaseInputFile)
     }
 }
 
