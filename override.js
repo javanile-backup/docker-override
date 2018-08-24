@@ -56,7 +56,7 @@ function overrideAction(file) {
     if (!fu.fileExists(overrideInputFile)) { return; }
     if (!fu.fileExists(originalInputFile)) { fu.rename(codebaseInputFile, originalInputFile) }
 
-    console.log('[ACTION] docker-override: override (' + file + ')')
+    console.log('[EVENT] docker-override: override (' + file + ')')
     switch (path.extname(file)) {
         case 'json': return fu.mergeJsonFile(codebaseInputFile, originalInputFile, overrideInputFile)
         default: return fu.copy(overrideInputFile, codebaseInputFile)
