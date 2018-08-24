@@ -50,7 +50,7 @@ function overrideAction(file) {
     var originalInputFile = path.join(codebasePath, file + '.original')
     var codebaseInputFile = path.join(codebasePath, file)
     var overrideInputFile = path.join(overridePath, file)
-    if (!fu.fileExists(overrideIntpuFile)) { return; }
+    if (!fu.fileExists(overrideInputFile)) { return; }
     if (!fu.fileExists(originalInputFile)) { fu.rename(codebaseInputFile, originalInputFile) }
 
     console.log('[ACTION] docker-override: override (' + file + ')')
